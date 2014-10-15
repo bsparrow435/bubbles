@@ -1,0 +1,25 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"name": "bubbles",
+			"path": "C:\Users\bsparrow\Documents\GitHub/bubbles"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Flixel",
+			"path": "C:\HaxeToolkit\haxe\lib\flixel/3,3,5/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Flixel Addons",
+			"path": "C:\HaxeToolkit\haxe\lib\flixel-addons/1,1,0/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Haxe",
+			"path": "C:\HaxeToolkit\haxe\std"
+		}
+	]
+}
