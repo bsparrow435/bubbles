@@ -18,9 +18,9 @@ class Player extends FlxSprite
 		setFacingFlip(FlxObject.RIGHT,true,false);
 		animation.add("lr",[3,4,3,5],6,false);
 		maxVelocity.x = 400;
-		maxVelocity.y = 1000;
-		acceleration.y = 1000;
-		drag.x = 1600;
+		maxVelocity.y = 600;
+		acceleration.y = 600;
+		drag.x = 1200;
 	}
 
 	public function movement():Void
@@ -42,7 +42,7 @@ class Player extends FlxSprite
 		{
 			velocity.y = -maxVelocity.y/2;
 		}
-		if((velocity.x != 0 || velocity.y != 0) && touching == FlxObject.NONE)
+		if(velocity.x != 0 || velocity.y != 0)
 		{
 			switch (facing) 
 			{
