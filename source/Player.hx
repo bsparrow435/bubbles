@@ -12,7 +12,11 @@ class Player extends FlxSprite
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X,Y);
-		makeGraphic(16,16, 0xffaa1111);
+		//makeGraphic(16,16, 0xffaa1111);
+		loadGraphic(AssetPaths.PLAYER__png,true,16,16);
+		setFacingFlip(FlxObject.LEFT,false,false);
+		setFacingFlip(FlxObject.RIGHT,true,false);
+		animation.add("lr",[3,4,3,5],6,false);
 		maxVelocity.x = 400;
 		maxVelocity.y = 1000;
 		acceleration.y = 1000;
@@ -27,14 +31,24 @@ class Player extends FlxSprite
 		if(FlxG.keys.anyPressed(["LEFT","A"]))
 		{
 			acceleration.x = -maxVelocity.x*4;
+			facing = FlxObject.LEFT;
 		}
 		if(FlxG.keys.anyPressed(["RIGHT","D"]))
 		{
 			acceleration.x = maxVelocity.x*4;
+			facing = FlxObject.RIGHT;
 		}
 		if(FlxG.keys.anyJustPressed(["SPACE"]) && isTouching(FlxObject.FLOOR))
 		{
 			velocity.y = -maxVelocity.y/2;
+		}
+		if((velocity.x != 0 || velocity.y != 0) && touching == FlxObject.NONE)
+		{
+			switch (facing) 
+			{
+			  	case FlxObject.RIGHT,FlxObject.LEFT:
+			  		animation.play("lr");
+			}  
 		}
 	}
 
