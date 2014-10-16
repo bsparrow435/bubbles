@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.input.mouse.FlxMouse;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -16,6 +17,7 @@ import flixel.util.FlxMath;
 class PlayState extends FlxState
 {
 	private var _player:Player;
+	private var _crosshair:Crosshair;
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
 	/**
@@ -29,8 +31,11 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(2, FlxObject.ANY); // Define wall tile
 		add(_mWalls);
 		_player = new Player(); //Create player
+		_crosshair = new Crosshair();
 		_map.loadEntities(placeEntities, "entities"); //map function over all entities in OGMO map
 		add(_player); //Enable player
+		add(_crosshair);
+		FlxG.mouse.visible = false;
 		super.create();
 	}
 
