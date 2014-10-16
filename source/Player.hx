@@ -42,7 +42,7 @@ class Player extends FlxSprite
 		{
 			velocity.y = -maxVelocity.y/2;
 		}
-		if(velocity.x != 0 || velocity.y != 0)
+		if((velocity.x != 0 || velocity.y != 0) && velocity.y == 0)
 		{
 			switch (facing) 
 			{

@@ -28,9 +28,13 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(1, FlxObject.NONE); // Define floor tile
 		_mWalls.setTileProperties(2, FlxObject.ANY); // Define wall tile
 		add(_mWalls);
+
 		_player = new Player(); //Create player
 		_map.loadEntities(placeEntities, "entities"); //map function over all entities in OGMO map
 		add(_player); //Enable player
+
+		FlxG.camera.follow(_player, flixel.FlxCamera.STYLE_PLATFORMER,1);
+
 		super.create();
 	}
 
