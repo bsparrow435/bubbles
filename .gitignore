@@ -18,6 +18,9 @@ $RECYCLE.BIN/
 *.exe
 *.n
 
+# Sublime specific files
+*.sublime-project
+
 # =========================
 # Operating System Files
 # =========================
