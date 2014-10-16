@@ -8,8 +8,10 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
+import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 import flixel.input.mouse.FlxMouse;
+import flixel.util.FlxSpriteUtil;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -20,6 +22,7 @@ class PlayState extends FlxState
 	private var _crosshair:Crosshair;
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
+	private var _highlightBox:FlxSprite;
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -30,12 +33,19 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(1, FlxObject.NONE); // Define floor tile
 		_mWalls.setTileProperties(2, FlxObject.ANY); // Define wall tile
 		add(_mWalls);
+
+		_highlightBox = new FlxSprite(0,0);
+		_highlightBox.makeGraphic( 16, 16 , FlxColor.TRANSPARENT);
+		FlxSpriteUtil.drawRect( _highlightBox ,0, 0 , 15 , 15 , FlxColor.TRANSPARENT , {thickness: 1, color: FlxColor.WHITE});
+		add(_highlightBox);
+
 		_player = new Player(); //Create player
 		_crosshair = new Crosshair();
 		_map.loadEntities(placeEntities, "entities"); //map function over all entities in OGMO map
 		add(_player); //Enable player
 		add(_crosshair);
 		FlxG.mouse.visible = false;
+		FlxG.camera.follow(_player, flixel.FlxCamera.STYLE_PLATFORMER,1);
 		super.create();
 	}
 
@@ -65,8 +75,19 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
-		super.update();
-
 		FlxG.collide(_player, _mWalls);
+
+		_highlightBox.x = Math.floor(FlxG.mouse.x / 16) * 16;
+		_highlightBox.y = Math.floor(FlxG.mouse.y / 16) * 16;
+
+		if (FlxG.mouse.pressed)
+		{
+			// FlxTilemaps can be manually edited at runtime as well.
+			// Setting a tile to 0 removes it, and setting it to anything else will place a tile.
+			// If auto map is on, the map will automatically update all surrounding tiles.
+			_mWalls.setTile(Std.int(FlxG.mouse.x / 16), Std.int(FlxG.mouse.y / 16), FlxG.keys.pressed.SHIFT ? 1 : 2);
+		}
+
+		super.update();
 	}	
 }

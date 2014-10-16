@@ -17,10 +17,10 @@ class Player extends FlxSprite
 		setFacingFlip(FlxObject.LEFT,false,false);
 		setFacingFlip(FlxObject.RIGHT,true,false);
 		animation.add("lr",[3,4,3,5],6,false);
-		maxVelocity.x = 400;
-		maxVelocity.y = 1000;
-		acceleration.y = 1000;
-		drag.x = 1600;
+		maxVelocity.x = 200;
+		maxVelocity.y = 600;
+		acceleration.y = 600;
+		drag.x = 1200;
 	}
 
 	public function movement():Void
@@ -42,8 +42,16 @@ class Player extends FlxSprite
 		{
 			velocity.y = -maxVelocity.y/2;
 		}
-		if((velocity.x != 0 || velocity.y != 0) && touching == FlxObject.NONE)
+		if((velocity.x != 0 || velocity.y != 0) && velocity.y == 0)
 		{
+			if(FlxG.keys.anyPressed(["SHIFT"]) && isTouching(FlxObject.FLOOR))
+			{
+				maxVelocity.x = 400;      
+			}
+			else
+			{
+				maxVelocity.x = 200;
+			}
 			switch (facing) 
 			{
 			  	case FlxObject.RIGHT,FlxObject.LEFT:
