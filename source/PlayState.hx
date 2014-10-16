@@ -40,11 +40,11 @@ class PlayState extends FlxState
 		add(_highlightBox);
 
 		_player = new Player(); //Create player
-		_crosshair = new Crosshair();
+		//_crosshair = new Crosshair();
 		_map.loadEntities(placeEntities, "entities"); //map function over all entities in OGMO map
 		add(_player); //Enable player
-		add(_crosshair);
-		FlxG.mouse.visible = false;
+		//add(_crosshair);
+		//FlxG.mouse.visible = false;
 		FlxG.camera.follow(_player, flixel.FlxCamera.STYLE_PLATFORMER,1);
 		super.create();
 	}
